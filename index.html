@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List</title>
+  <link rel="icon" type="image/svg+xml"
+href="data:image/svg+xml;utf8,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='24' fill='%23FFD000' stroke='%23111' stroke-width='3'/>
+  <path d='M20 33l8 9 16-18' fill='none' stroke='%23111' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/>
+</svg>">
+  <meta name="description" content="A simple and minimal to-do list application with clear due dates." />
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <!-- BRAND BAR -->
+  <div class="brandbar">
+    <div class="container brandbar-wrap">
+      <div class="brand-left">
+  <svg class="logo-svg" width="28" height="28" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Todo Logo">
+    <circle cx="32" cy="32" r="24" fill="#FFD000" stroke="#111" stroke-width="4"/>
+    <path d="M20 33l8 9 16-18" fill="none" stroke="#111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <strong>My Tasks</strong>
+</div>
+
+
+      <div class="brand-right">
+        <small>Todo</small>
+      </div>
+    </div>
+  </div>
+
+  <header class="container">
+    <h1>To-Do List</h1>
+    <p class="subtitle">Simple to-do with clear due dates—fast & minimal.</p>
+  </header>
+
+  <!-- DASHBOARD -->
+  <section class="container dashboard" aria-live="polite">
+    <div class="dash-card total">
+      <div class="dash-icon" aria-hidden="true">📋</div>
+      <div class="dash-meta">
+        <div class="dash-title">Total Tasks</div>
+        <div class="dash-value" id="dash-total">0</div>
+        <div class="dash-desc">Semua task yang tercatat</div>
+      </div>
+    </div>
+    <div class="dash-card done">
+      <div class="dash-icon" aria-hidden="true">✅</div>
+      <div class="dash-meta">
+        <div class="dash-title">Done</div>
+        <div class="dash-value" id="dash-done">0</div>
+        <div class="dash-desc">Tugas yang selesai</div>
+      </div>
+    </div>
+    <div class="dash-card progress">
+      <div class="dash-icon" aria-hidden="true">📈</div>
+      <div class="dash-meta">
+        <div class="dash-title">Progress</div>
+        <div class="dash-value" id="dash-rate">0%</div>
+        <div class="dash-desc">Persentase penyelesaian</div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- FORM -->
+    <section class="card">
+      <h2>Add a Task</h2>
+      <form id="todo-form" novalidate>
+        <div class="field">
+          <label for="todo-text">Task</label>
+          <input type="text" id="todo-text" name="text" placeholder="e.g., Kerjain PR Matematika" required minlength="3" />
+          <small class="error" id="text-error" aria-live="polite"></small>
+        </div>
+
+        <div class="field">
+          <label for="todo-date">Due Date</label>
+          <div class="date-field">
+            <!-- Tanggal -->
+            <input
+              type="text"
+              id="todo-date"
+              name="date"
+              placeholder="mm/dd/yyyy"
+              inputmode="numeric"
+              autocomplete="off"
+              required
+            />
+            <button type="button" id="date-trigger" class="icon-btn calendar" title="Open calendar" aria-label="Open calendar">📅</button>
+
+            <!-- Jam (opsional) -->
+            <span class="time-sep" aria-hidden="true">@</span>
+            <input
+              type="text"
+              id="todo-time"
+              name="time"
+              placeholder="hh:mm"
+              inputmode="numeric"
+              autocomplete="off"
+              aria-describedby="time-help"
+            />
+          </div>
+          <small id="time-help" class="muted small">Jam opsional. Contoh 07:30 atau 18:05.</small>
+          <small class="error" id="date-error" aria-live="polite"></small>
+        </div>
+
+        <button type="submit" class="btn">Add Task</button>
+      </form>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="card">
+      <h2>Filter</h2>
+      <div class="filters">
+        <div class="field">
+          <label for="status-filter">Status</label>
+          <select id="status-filter">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+        <div class="field grow">
+          <label for="search-input">Search</label>
+          <input type="text" id="search-input" placeholder="Cari judul task…" />
+        </div>
+        <div class="field">
+          <label for="date-scope">Due</label>
+          <select id="date-scope" title="Quick date scope">
+            <option value="any">Any time</option>
+            <option value="today">Today</option>
+            <option value="overdue">Overdue</option>
+            <option value="upcoming">Upcoming</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIST -->
+    <section class="card">
+      <div class="card-head">
+        <h2>To-Do List</h2>
+        <button id="delete-all" class="icon-btn danger slim" title="Delete all tasks">Delete All</button>
+      </div>
+      <ul id="todo-list" class="list" aria-live="polite"></ul>
+      <p id="empty-state" class="muted">No tasks yet. Add your first task above.</p>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <small>Designed & Coded by Xaviour — © 2025</small>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
